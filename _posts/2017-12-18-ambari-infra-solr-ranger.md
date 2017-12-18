@@ -2,7 +2,7 @@
 layout: post
 title:  "Apache Ambari Infra Solr and Apache Ranger - Fixing OOM"
 date:   2017-12-18 12:00:00 -0600
-categories: update
+tags: bigdata apache ambari ambari-infra ranger solr oom
 ---
 ### Overview
 * Diagnosing the problem
