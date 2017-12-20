@@ -11,15 +11,15 @@ tags: bigdata apache hadoop hdfs webhdfs knox .net dotnet csharp C#
 * Source & Example: [https://github.com/risdenk/webhdfs-dotnet](https://github.com/risdenk/webhdfs-dotnet)
 
 ### Overview
-[WebHDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/WebHDFS.html) is a REST api for [Apache Hadoop HDFS](https://hadoop.apache.org). Existing .Net WebHDFS libraries do not support basic authentication when using [Apache Knox](https://knox.apache.org/). Furthermore, many of the existing implementations against WebHDFS lacks in regards to streaming files and handling redirects appropriately. Building a library from scratch using .Net HTTP libraries is possible but need to watch out for a few implementation issues. WebClient is too simple to handle the requirements where as HttpWebRequest requires too much customization to make work correctly. RestSharp, although it tries to be the best of WebClient and HttpWebRequest, doesn’t handle PUT/POST uploads well. HttpClient is the best option since it is built into .Net and makes the implementation simple. I put together a reference implementation that accomplishes all of the goals laid out and published on Nuget as a library. 
+[WebHDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/WebHDFS.html) is a REST api for [Apache Hadoop HDFS](https://hadoop.apache.org). Existing .Net WebHDFS libraries do not support basic authentication when using [Apache Knox](https://knox.apache.org/). Furthermore, many of the existing implementations against WebHDFS lack features such as streaming files and handling redirects appropriately. Building a library from scratch using .Net HTTP libraries is possible but you need to watch out for a few implementation issues. WebClient is too simple to handle the requirements where as HttpWebRequest requires too much customization to make it work correctly. RestSharp, although it tries to be the best of WebClient and HttpWebRequest, doesn’t handle `PUT` or `POST` uploads well. HttpClient is the best option since it is built into .Net and makes the implementation simple. I put together a new .Net WebHDFS client implementation that accomplishes all of the goals laid out and is published on Nuget as a library. 
 
 ### Goals
-* handle redirects
-* stream file (avoid loading into memory)
-* handle basic authentication against Apache Knox
+* Handle redirects
+* Stream file (avoid loading into memory)
+* Handle basic authentication against Apache Knox
 
 ### Existing WebHDFS libraries
-I found these existing WebHDFS libraries by searching `webhdfs` in the Nuget gallery. I then reviewed the documentation and source code for each one to explore the features. None of the below existing WebHDFS libraries supports Knox and many don't support security at all.
+I found these existing WebHDFS libraries by searching `webhdfs` in the Nuget gallery. I then reviewed the documentation and source code for each one to explore the features. None of the existing WebHDFS libraries listed below support Knox and many don't support security at all.
 
 * [WebHdfs – justmara](https://www.nuget.org/packages/WebHdfs/)
     * Limited implementation
@@ -39,26 +39,26 @@ While researching existing WebHDFS libraries, I found that .Net has many differe
         * No way to send authentication across the redirect
     * Doesn't have a way to disable following the redirect easily
         * could extend the WebClient class and override the GetRequest method
-    * will upload a file, but copies into memory first
-    * responses are just byte arrays
+    * Will upload a file, but copies into memory first
+    * Responses are just byte arrays
 * [HttpWebRequest](https://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.aspx)
     * Built into .Net natively
-    * very flexible about redirects and authentication
-    * very hard to try to send a file
-    * very low level implementation
+    * Very flexible about redirects and authentication
+    * Very hard to try to send a file
+    * Very low level implementation
 * [HttpClient](https://msdn.microsoft.com/en-us/library/system.net.http.httpclient.aspx)
     * Built into .Net natively
-        * Requires .Net 4.5?
-        * combination of `WebClient` and `HttpWebRequest`
-    * easy to work with
-    * streams file uploads correctly
-    * can serialize/deserialize JSON responses automatically
+        * Requires .Net 4.5
+        * Combination of `WebClient` and `HttpWebRequest`
+    * Easy to work with
+    * Streams file uploads correctly
+    * Can serialize/deserialize JSON responses automatically
 * [RestSharp](http://restsharp.org/)
     * Not built into .Net natively
-    * terrible implementation of `PUT`
-        * assumes all File uploads are multipart form uploads
-        * makes it almost impossible to upload binary files
-    * trying to work around file uploads requires copying to byte array
+    * Terrible implementation of `PUT` and `POST` uploads
+        * Assumes all `File` uploads are multipart form uploads
+        * Makes it almost impossible to upload binary files
+    * Trying to work around file uploads requires copying to byte array
 
 ### WebHDFS.Client - A new .Net WebHDFS client
 * WebHDFS.Client - [https://www.nuget.org/packages/WebHDFS.Client/](https://www.nuget.org/packages/WebHDFS.Client/)
@@ -72,7 +72,7 @@ While researching existing WebHDFS libraries, I found that .Net has many differe
         * [https://github.com/risdenk/webhdfs-dotnet/](https://github.com/risdenk/webhdfs-dotnet/)
 
 #### Notes about WebHDFS with Apache Knox
-`PreAuthenticate` is misleading when it comes to understanding how 401s are handled. Apache Knox injects 401 redirects if there are no `Authorization` headers present in the initial request. The 401s are expected even with the `PreAuthenticate`. `PreAuthenticate` only caches the 401 and won’t have it get sent again if you were to make repeated calls to the same host.
+`PreAuthenticate` is misleading when it comes to understanding how 401s are handled. Apache Knox injects a 401 response if there are no `Authorization` headers present in the initial request. The 401s are expected even with the `PreAuthenticate`. `PreAuthenticate` only caches the 401 and then the next request won't have to deal with a 401 if you were to make repeated calls to the same host.
 
 #### WebHDFS with Apache Knox Sequence Diagram - Create File
 For reference this is the sequence diagram that is being followed for the WebHDFS create file request through Apache Knox:
