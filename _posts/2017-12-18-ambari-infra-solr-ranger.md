@@ -26,7 +26,7 @@ There are a few ways to diagnosis this is happening:
     * If a file called `/var/log/ambari-infra-solr/solr_oom_killer-8886*` is present, this means that the Solr OOM killer ran when there was a GC error.
     * The file name has the time of when Solr crashed.
 * Analyzing the garbage collection (GC) logs
-    * GCViewer ([https://github.com/chewiebug/GCViewer](https://github.com/cheiwbug/GCViewer)) can analyze the Solr GC logs
+    * GCViewer ([https://github.com/chewiebug/GCViewer](https://github.com/chewiebug/GCViewer/)) can analyze the Solr GC logs
     * Solr GC logs are typically available here: `/var/log/ambari-infra-solr/solr_gc.log`
     * The output below is typical of the GC logs where this occurs regardless of the heap size.
         * The heap looks normal with tenured increasing overtime. At some point, the heap increases drastically with full GC pauses. At this point, Solr crashes due to OOM.
