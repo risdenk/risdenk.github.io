@@ -4,13 +4,17 @@ title:  "Apache Ambari Infra Solr and Apache Ranger - Fixing OOM"
 date:   2017-12-18 12:00:00 -0600
 tags: bigdata apache ambari ambari-infra ranger solr oom
 ---
+**Update - 2017-12-19**
+* [Ranger User Mailing list post](https://mail-archives.apache.org/mod_mbox/ranger-user/201712.mbox/%3CCAJU9nmjAZSuHdujNtOUbsAgtf4qG7YiJ46CnCceFbcUAyZmJWw%40mail.gmail.com%3E)
+* [RANGER-1938](https://issues.apache.org/jira/browse/RANGER-1938)
+
 ### Overview
 * Diagnosing the problem
 * Understanding the problem
 * Fixing the problem
 
 ### Diagnosing the problem
-Ambari Infra Solr (or Solr that Ranger is pointing at) tends to crash with Java OOM killer even with increased Java heap. There are a few ways to diagnosis this is happening:
+Ambari Infra Solr (or Apache Solr that Ranger is pointing at) tends to crash with Java OOM killer even with increased Java heap. There are a few ways to diagnosis this is happening:
 * `/var/log/ambari-infra-solr/solr_oom_killer-8886*`
     * If a file called `/var/log/ambari-infra-solr/solr_oom_killer-8886*` is present, this means that the Solr OOM killer ran when there was a GC error.
     * The file name has the time of when Solr crashed.
