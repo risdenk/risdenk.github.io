@@ -5,16 +5,23 @@ date:   2017-12-18 12:00:00 -0600
 tags: bigdata apache ambari ambari-infra ranger solr oom
 ---
 **Update - 2017-12-19**
-* [Ranger User Mailing list post](https://mail-archives.apache.org/mod_mbox/ranger-user/201712.mbox/%3CCAJU9nmjAZSuHdujNtOUbsAgtf4qG7YiJ46CnCceFbcUAyZmJWw%40mail.gmail.com%3E)
-* [RANGER-1938](https://issues.apache.org/jira/browse/RANGER-1938)
+* Fixed some content and formatting
+* Added external links
+    * [Ranger User Mailing list post](https://mail-archives.apache.org/mod_mbox/ranger-user/201712.mbox/%3CCAJU9nmjAZSuHdujNtOUbsAgtf4qG7YiJ46CnCceFbcUAyZmJWw%40mail.gmail.com%3E)
+    * [RANGER-1938](https://issues.apache.org/jira/browse/RANGER-1938)
 
 ### Overview
+When using [Apache Ranger](https://ranger.apache.org/), [Apache Ambari](https://ambari.apache.org/) [Infra Solr](https://community.hortonworks.com/questions/74847/what-is-difference-between-ambari-infra-and-solr.html) (or any [Apache Solr](https://lucene.apache.org/solr/) that Ranger is pointing at) crashes with Java OOM killer even with increased Java heap. Increasing the heap makes the problem take longer to occur, but eventually (sometimes coinciding with a TTL deletion) a Solr OOM error occurs. Other users have reported the same issue for example [here](https://community.hortonworks.com/questions/148216/solr-jvm-heap-recommendation.html).
+
+This blog is organized into the following sections:
+
 * Diagnosing the problem
 * Understanding the problem
 * Fixing the problem
 
 ### Diagnosing the problem
-Ambari Infra Solr (or Apache Solr that Ranger is pointing at) tends to crash with Java OOM killer even with increased Java heap. There are a few ways to diagnosis this is happening:
+There are a few ways to diagnosis this is happening:
+
 * `/var/log/ambari-infra-solr/solr_oom_killer-8886*`
     * If a file called `/var/log/ambari-infra-solr/solr_oom_killer-8886*` is present, this means that the Solr OOM killer ran when there was a GC error.
     * The file name has the time of when Solr crashed.
@@ -54,17 +61,17 @@ Apache Ranger has a schema that does not have DocValues enabled for the `_versio
 ### Fixing the problem
 Apache Ambari Infra Solr is just packaged Apache Solr 5.5.x. Solr 5.5.x has support for DocValues for most fields including the `_version_` field. Ranger 0.7.x (latest as of this writing) ships with Solr configuration files as part of the release (https://github.com/apache/ranger/tree/ranger-0.7/security-admin/contrib/solr_for_audit_setup/conf). These are the configurations used by Apache Solr to determine if DocValues is used. By default, DocValues is off for `_version_` and some other fields.
 
-The fix for the above Solr heap issue is to do the following:
-
-* Download the existing Solr schema from Zookeeper (pre-edited files are already available: https://gist.github.com/risdenk/8cc8f722e200468f9aa536cee7979d06)
-* Modify the Solr schema to enable DocValues on required fields
-* Upload the modified Solr schema to Zookeeper
-* Delete the Solr `ranger_audits` collection
-* Recreate the Solr `ranger_audits` collection
-
 With DocValues enabled for `_version_`, newly indexed documents will not have to uninvert the `_version_` field when being queried. The changes made for primitive fields to use DocValues can also reduce heap usage. This significantly reduces the heap necessary for Solr when using Ranger.
 
-The specific commands for Ambari Infra Solr:
+The general steps to fix the above problem is to do the following:
+
+1. Download the existing Solr schema from Zookeeper (pre-edited files are already available [here](https://gist.github.com/risdenk/8cc8f722e200468f9aa536cee7979d06)).
+2. Modify the Solr schema to enable DocValues on required fields
+3. Upload the modified Solr schema to Zookeeper
+4. Delete the Solr `ranger_audits` collection
+5. Recreate the Solr `ranger_audits` collection
+
+Specific commands for Ambari Infra Solr:
 ```
 ssh into Ambari Infra Solr host
 
@@ -73,28 +80,29 @@ sudo -u infra-solr -i
 kinit -kt /etc/security/keytabs/ambari-infra-solr.service.keytab $(whoami)/$(hostname -f)
 
 # Download from zookeeper and edit
-#SOLR_ZK_CREDS_AND_ACLS="-Djava.security.auth.login.config=/etc/ambari-infra-solr/conf/infra_solr_jaas.conf" /usr/lib/ambari-infra-solr/server/scripts/cloud-scripts/zkcli.sh --zkhost ZKQUORUM /infra-solr -cmd getfile /configs/ranger_audits/managed-schema managed-schema
-# edits required:
-# schema version to 1.6
-# For the following fieldTypes add 'docValues="true"': date, double, float, int, long, tdate, tdates, tdouble, tdoubles, tfloat, tfloats, tint, tints, tlong, tlongs
-# For `_version_` fieldType, set indexed=”false” 
+  #SOLR_ZK_CREDS_AND_ACLS="-Djava.security.auth.login.config=/etc/ambari-infra-solr/conf/infra_solr_jaas.conf" /usr/lib/ambari-infra-solr/server/scripts/cloud-scripts/zkcli.sh --zkhost ZKQUORUM /infra-solr -cmd getfile /configs/ranger_audits/managed-schema managed-schema
+  # edits required:
+    # schema version to 1.6
+    # For the following fieldTypes add 'docValues="true"': date, double, float, int, long, tdate, tdates, tdouble, tdoubles, tfloat, tfloats, tint, tints, tlong, tlongs
+    # For `_version_` fieldType, set indexed=”false” 
 # OR
-# Download pre-edited
-#wget -O managed-schema https://gist.githubusercontent.com/risdenk/8cc8f722e200468f9aa536cee7979d06/raw/aa61053847b84e40c3bae8adf806e68b5a1408d3/managed-schema.xml
+  # Download pre-edited
+  #wget -O managed-schema https://gist.githubusercontent.com/risdenk/8cc8f722e200468f9aa536cee7979d06/raw/aa61053847b84e40c3bae8adf806e68b5a1408d3/managed-schema.xml
 
 # Upload configuration back to Zookeeper
 SOLR_ZK_CREDS_AND_ACLS="-Djava.security.auth.login.config=/etc/ambari-infra-solr/conf/infra_solr_jaas.conf" /usr/lib/ambari-infra-solr/server/scripts/cloud-scripts/zkcli.sh --zkhost ZKQUORUM /infra-solr -cmd putfile /configs/ranger_audits/managed-schema managed-schema
 
 # Delete and recreate the ranger_audits collection
-# If not using Kerberos, remove "-u : --negotiate"
-curl -i -u : --negotiate "http://$(hostname -f):8886/solr/admin/collections?action=DELETE&name=ranger_audits"
-curl -i -u : --negotiate "http://$(hostname -f):8886/solr/admin/collections?action=CREATE&name=ranger_audits&numShards=5&maxShardsPerNode=10"
+# If using Kerberos, add "-u : --negotiate" to the curl commands below
+curl -i "http://$(hostname -f):8886/solr/admin/collections?action=DELETE&name=ranger_audits"
+curl -i "http://$(hostname -f):8886/solr/admin/collections?action=CREATE&name=ranger_audits&numShards=5&maxShardsPerNode=10"
 ```
 
-#### Side note about Solr and Ranger
-
-* I typically increase number of shards from 1 to at least 5 (this is done in the above curl CREATE command). Solr only supports an absolute max of 2 billion (size of int) documents in a single shard due to Lucene format. This is a practical limit of 1 billion since deletes count. Many Ambari Infra Solr installations have much more than 1 billion audits in the default 90 day retention. 
-* I also decrease the retention TTL from 90 days to a few weeks to prevent too many documents being indexed in Solr.
-    * An example of doing that is here: https://community.hortonworks.com/articles/63853/solr-ttl-auto-purging-solr-documents-ranger-audits.html.
-    * A pre-edited Solr solrconfig.xml is here: https://gist.githubusercontent.com/risdenk/8cc8f722e200468f9aa536cee7979d06/raw/aa61053847b84e40c3bae8adf806e68b5a1408d3/solrconfig.xml
+#### Miscellaneous notes about Apache Solr and Apache Ranger
+* I typically increase number of shards from 1 to at least 5 (this is done in the above curl `CREATE` command).
+    * Solr only supports an absolute max of ~2 billion (size of int) documents in a single shard due to Lucene max shard size. This is a practical limit of 1 billion since deletes count towards the total. Many Ambari Infra Solr installations have much more than 1 billion audit events in the default 90 day retention.
+    * A single Solr node can handle multiple shards (and collections).
+* I also decrease the retention `TTL` from 90 days to a few weeks to prevent too many documents being indexed in Solr.
+    * An example of doing that is [here](https://community.hortonworks.com/articles/63853/solr-ttl-auto-purging-solr-documents-ranger-audits.html).
+    * A pre-edited Solr solrconfig.xml is [here](https://gist.githubusercontent.com/risdenk/8cc8f722e200468f9aa536cee7979d06/raw/aa61053847b84e40c3bae8adf806e68b5a1408d3/solrconfig.xml).
 
