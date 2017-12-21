@@ -79,8 +79,12 @@ sudo -u infra-solr -i
 # If using Kerberos
 kinit -kt /etc/security/keytabs/ambari-infra-solr.service.keytab $(whoami)/$(hostname -f)
 
+# Set environment for zkcli
+source /etc/ambari-infra-solr/conf/infra-solr-env.sh
+export SOLR_ZK_CREDS_AND_ACLS="${SOLR_AUTHENTICATION_OPTS}"
+
 # Download from zookeeper and edit
-  #SOLR_ZK_CREDS_AND_ACLS="-Djava.security.auth.login.config=/etc/ambari-infra-solr/conf/infra_solr_jaas.conf" /usr/lib/ambari-infra-solr/server/scripts/cloud-scripts/zkcli.sh --zkhost ZKQUORUM /infra-solr -cmd getfile /configs/ranger_audits/managed-schema managed-schema
+  #/usr/lib/ambari-infra-solr/server/scripts/cloud-scripts/zkcli.sh --zkhost "${ZK_HOST}" -cmd getfile /configs/ranger_audits/managed-schema managed-schema
   # edits required:
     # schema version to 1.6
     # For the following fieldTypes add 'docValues="true"': date, double, float, int, long, tdate, tdates, tdouble, tdoubles, tfloat, tfloats, tint, tints, tlong, tlongs
@@ -90,7 +94,7 @@ kinit -kt /etc/security/keytabs/ambari-infra-solr.service.keytab $(whoami)/$(hos
   #wget -O managed-schema https://gist.githubusercontent.com/risdenk/8cc8f722e200468f9aa536cee7979d06/raw/aa61053847b84e40c3bae8adf806e68b5a1408d3/managed-schema.xml
 
 # Upload configuration back to Zookeeper
-SOLR_ZK_CREDS_AND_ACLS="-Djava.security.auth.login.config=/etc/ambari-infra-solr/conf/infra_solr_jaas.conf" /usr/lib/ambari-infra-solr/server/scripts/cloud-scripts/zkcli.sh --zkhost ZKQUORUM /infra-solr -cmd putfile /configs/ranger_audits/managed-schema managed-schema
+/usr/lib/ambari-infra-solr/server/scripts/cloud-scripts/zkcli.sh --zkhost "${ZK_HOST}" -cmd putfile /configs/ranger_audits/managed-schema managed-schema
 
 # Delete and recreate the ranger_audits collection
 # If using Kerberos, add "-u : --negotiate" to the curl commands below
