@@ -19,7 +19,7 @@ Hue uses [WebHDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/ha
 ### Fixing Hue WebHDFS Avro Performance
 The performance of the Hue File Browser for Avro files was significantly improved by adjusting how Hue reads from WebHDFS. Hue's WebHDFS library (`webhdfs.py`) typically would request a `DEFAULT_READ_SIZE` of 1MB to reduce network round trips. The Avro Python library was overriding this by requesting `read(1)` which means read 1 byte at a time.
 
-I opened an issue against the Hue project [here](https://github.com/cloudera/hue/issues/587) to raise awareness to this problem. I followed up the issue with a [pull request](https://github.com/cloudera/hue/pull/588/files) to address the underlying performance issue.
+I opened an issue against the Hue GitHub project [here](https://github.com/cloudera/hue/issues/587) and created [HUE-7821](https://issues.cloudera.org/browse/HUE-7821) to raise awareness to this problem. I followed up the issue with a [pull request](https://github.com/cloudera/hue/pull/588/files) to address the underlying performance issue.
 
 The pull request changes Hue's WebHDFS library to ensure that for each `read(...)` call that at least `DEFAULT_READ_SIZE` is requested. This is then cached for a future call to `read`. Only the requested length of data is returned to the caller. By reusing the `self._pos` variable and one new caching variable, the change consisted of less than 20 lines of code and improved performance dramatically.
 
