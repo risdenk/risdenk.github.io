@@ -44,15 +44,15 @@ status: 404
 
 It was determined that this behavior was not intended and so I went about trying to figure out what caused this to occur.
 
-I pulled down a few Knox versions 0.8.0 and 0.9.0 and found that it did not affect 0.8.0. I pulled down the code from https://github.com/hortonworks/knox-release/tree/HDP-2.5.3.77-tag and did a `git bisect` to find the offending commit using this [test case](https://gist.github.com/risdenk/afecc66d6fc0c9d665abd1ae5466f341). The offending commit is [c28224c](https://git-wip-us.apache.org/repos/asf?p=knox.git;h=c28224c) and related JIRA is [KNOX-690](https://issues.apache.org/jira/browse/KNOX-690).
+I pulled down a few Knox versions 0.8.0 and 0.9.0 and found that it did not affect 0.8.0. I pulled down the code from the [Hortonworks knox-release source](https://github.com/hortonworks/knox-release/tree/HDP-2.5.3.77-tag) at tag `HDP-2.5.3.77-tag` and did a `git bisect` to find the offending commit using this [test case](https://gist.github.com/risdenk/afecc66d6fc0c9d665abd1ae5466f341). The offending commit is [c28224c](https://git-wip-us.apache.org/repos/asf?p=knox.git;h=c28224c) and related JIRA is [KNOX-690](https://issues.apache.org/jira/browse/KNOX-690).
 
 #### Fixing Knox URL encoding
-
 I rebuilt Knox from the [Hortonworks knox-release source](https://github.com/hortonworks/knox-release/tree/HDP-2.5.3.77-tag) at tag `HDP-2.5.3.77-tag` with the commit `c28224c` reverted. The adjusted code is [here](https://github.com/risdenk/knox-release/tree/hdp25_revert_KNOX-690). The change is only a single commit [dc45212](https://github.com/risdenk/knox-release/commit/dc452126de99f6f1d15938f7294e95e3b7c89328).
 
 I rebuilt Knox with `mvn -DskipTests package` and copied the two affected jars (`gateway-provider-rewrite` and `gateway-util-urltemplate`) to `/usr/hdp/current/knox-server/lib/`. After restarting Knox, this made `%2F` encoded row keys work correctly. 
 
-Based on the work above, [KNOX-949](https://issues.apache.org/jira/browse/KNOX-949) and [KNOX-1005](https://issues.apache.org/jira/browse/KNOX-1005) fixed the URL encoding issues in Apache Knox. The issue was more widespread than just `%2F` but `%2F` is an interesting case just by itself. Apache Knox 0.14.0 is the first releast with the URL encoding issues fixed after Knox 0.6.0. 
+Based on the work above, [KNOX-949](https://issues.apache.org/jira/browse/KNOX-949) and [KNOX-1005](https://issues.apache.org/jira/browse/KNOX-1005) fixed the URL encoding issues in Apache Knox. The issue was more widespread than just `%2F` but `%2F` is an interesting case just by itself. [Apache Knox 0.14.0](https://cwiki.apache.org/confluence/display/KNOX/Release+0.14.0) is the first release with the URL encoding issues fixed after Knox 0.6.0.
 
 ### To be continued in part 2...
 Part 2 of this blog post will cover how the "`%2F` problem" manifested itself in Traefik after we were able to fix Apache Knox.
+
