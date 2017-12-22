@@ -1,8 +1,13 @@
 ---
 title: "%2F with WebHBase, Apache Knox, and Traefik - Part 2"
+date: 2017-12-22 12:00:00 -06:00
+tags:
+- bigdata
+- "%2f"
+- apache
+- knox
+- traefik
 layout: post
-date: '2017-12-22 12:00:00 -0600'
-tags: bigdata %2f apache knox traefik
 ---
 
 ### Background
