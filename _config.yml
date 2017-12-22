@@ -1,6 +1,6 @@
 ---
 title: Kevin Risden's Blog
-timezone: UTC
+timezone: America/Chicago
 collections:
   posts:
     title: Posts
@@ -10,7 +10,7 @@ collections:
     output: true
 email: 
 description: Kevin Risden's Blog
-baseurl: ''
+baseurl: 
 url: https://risdenk.github.io
 twitter_username: compuwizard123
 github_username: risdenk
