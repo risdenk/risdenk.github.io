@@ -1,9 +1,17 @@
 ---
+title: Apache Ambari Infra Solr and Apache Ranger - Fixing OOM
+date: 2017-12-18 18:00:00 Z
+tags:
+- bigdata
+- apache
+- ambari
+- ambari-infra
+- ranger
+- solr
+- oom
 layout: post
-title:  "Apache Ambari Infra Solr and Apache Ranger - Fixing OOM"
-date:   2017-12-18 12:00:00 -0600
-tags: bigdata apache ambari ambari-infra ranger solr oom
 ---
+
 **Update - 2017-12-21**
 * Added Ambari JIRA link
     * [AMBARI-22684](https://issues.apache.org/jira/browse/AMBARI-22684)

@@ -1,9 +1,20 @@
 ---
+title: ".Net WebHDFS Client (with and without Apache Knox)"
+date: 2017-12-19 18:00:00 Z
+tags:
+- bigdata
+- apache
+- hadoop
+- hdfs
+- webhdfs
+- knox
+- ".net"
+- dotnet
+- csharp
+- C#
 layout: post
-title:  ".Net WebHDFS Client (with and without Apache Knox)"
-date:   2017-12-19 12:00:00 -0600
-tags: bigdata apache hadoop hdfs webhdfs knox .net dotnet csharp C#
 ---
+
 ### TL;DR
 .Net [WebHDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/WebHDFS.html) client that works with and without [Apache Knox](https://knox.apache.org).
 

@@ -1,9 +1,16 @@
 ---
+title: Improving Hue File Browser Avro Performance
+date: 2017-12-20 18:00:00 Z
+tags:
+- bigdata
+- hue
+- file
+- browser
+- avro
+- performance
 layout: post
-title:  "Improving Hue File Browser Avro Performance"
-date:   2017-12-20 12:00:00 -0600
-tags: bigdata hue file browser avro performance
 ---
+
 ### Background
 [Hue](http://gethue.com/) is a user interface for [Hadoop](https://hadoop.apache.org). Part of the benefit of using Hue is the ability to preview files directly in a web browser. The files that are stored on [HDFS](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html) are hard to work with when first getting started. The Hue File Browser makes it simple to browse the HDFS file system just as if you were browsing a file on your computer. Hue even supports the ability to view [Avro](https://avro.apache.org/) files natively.
 
