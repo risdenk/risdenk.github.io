@@ -27,6 +27,15 @@ google_analytics: UA-248716-10
 markdown: kramdown
 theme: minima
 plugins:
+  - jekyll-coffeescript
+  - jekyll-gist
+  - jekyll-github-metadata
+  - jekyll-paginate
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-default-layout
+  - jekyll-titles-from-headings
   - jekyll-feed
   - jekyll-redirect-from
   - jekyll-seo-tag
