@@ -59,5 +59,5 @@ I rebuilt Knox with `mvn -DskipTests package` and copied the two affected jars (
 Based on the work above, [KNOX-949](https://issues.apache.org/jira/browse/KNOX-949) and [KNOX-1005](https://issues.apache.org/jira/browse/KNOX-1005) fixed the URL encoding issues in Apache Knox. The issue was more widespread than just `%2F` but `%2F` is an interesting case just by itself. [Apache Knox 0.14.0](https://cwiki.apache.org/confluence/display/KNOX/Release+0.14.0) is the first release with the URL encoding issues fixed after Knox 0.6.0.
 
 ### To be continued in part 2...
-Part 2 of this blog post will cover how the "`%2F` problem" manifested itself in Traefik after we were able to fix Apache Knox.
+[Part 2]({% post_url 2017-12-22-percent-2f-webhbase-knox-traefik-part-2 %}) of this blog post covers how the "`%2F` problem" manifested itself in Traefik after we were able to fix Apache Knox.
 
