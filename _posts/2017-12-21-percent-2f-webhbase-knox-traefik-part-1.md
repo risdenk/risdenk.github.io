@@ -6,12 +6,12 @@ tags: bigdata %2f apache knox traefik
 ---
 
 ### Background
-[WebHBase](https://hbase.apache.org/book.html#_rest) is a server that allows interacting with Apache HBase over HTTP REST. [Apache Knox](https://knox.apache.org/) simplies security around [Apache Hadoop](https://hadoop.apache.org/) and [Apache HBase](https://hbase.apache.org/). [Traefik](https://traefik.io/) is a HTTP software load balancer that we utilize to balance traffic between multiple Apache Knox servers.
+[WebHBase](https://hbase.apache.org/book.html#_rest) is a server that allows interacting with Apache HBase over HTTP REST. [Apache Knox](https://knox.apache.org/) simplies security around [Apache Hadoop](https://hadoop.apache.org/) and [Apache HBase](https://hbase.apache.org/). [Traefik](https://traefik.io/) is an HTTP software load balancer that we utilize to balance traffic between multiple Apache Knox servers.
 
 <p style="text-align:center"><img width="350" src="/images/posts/2017-12-21/traefik_knox_webhbase_diagram.svg" /></p>
 
 ### Problem
-One of the groups I work with had stored data in HBase with forward slashes (`/`) in the rowkey. This translates to [`%2F`](https://www.w3schools.com/tags/ref_urlencode.asp)  based on URL encoding. We started to call this problem the "`%2F` problem" because each layer from WebHBase back up to the client had issues with `%2F`.
+One of the groups I work with had stored data in HBase with forward slashes (`/`) in the [rowkey](https://hbase.apache.org/book.html#rowkey.design). This translates to [`%2F`](https://www.w3schools.com/tags/ref_urlencode.asp)  based on URL encoding. We started to call this problem the "`%2F` problem" because each layer from WebHBase back up to the client had issues with `%2F`.
 
 ### Apache HBase, WebHBase, and `%2F`
 Apache HBase stores and retrieves data as byte arrays. This data can be encoded by the user in a variety of ways. WebHBase will take byte arrays and typically will Base64 encode them to ensure they are safe to transmit over HTTP. The user can then decode the Base64 encoded string to retrieve the results.
