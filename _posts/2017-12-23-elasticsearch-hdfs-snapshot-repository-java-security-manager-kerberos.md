@@ -1,8 +1,18 @@
 ---
-title: "Elasticsearch, HDFS Snapshot Repository, Java SecurityManager, and Kerberos"
-date: 2017-12-23 18:00:00 Z
+title: Elasticsearch, HDFS Snapshot Repository, Java SecurityManager, and Kerberos
+date: 2017-12-23 12:00:00 -06:00
+tags:
+- bigdata
+- elasticsearch
+- hdfs
+- hadoop
+- java
+- security
+- manager
+- kerberos
+- snapshot
+- elastic
 layout: post
-tags: bigdata elasticsearch hdfs hadoop java security manager kerberos snapshot elastic
 ---
 
 ### Overview
