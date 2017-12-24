@@ -1,8 +1,18 @@
 ---
 title: Elasticsearch Java High Level REST Client - Scroll API - Load Balancer
-date: 2017-12-24 18:00:00 Z
+date: 2017-12-24 12:00:00 -06:00
+tags:
+- bigdata
+- elasticsearch
+- scroll
+- load
+- balancer
+- java
+- client
+- rest
+- high
+- level
 layout: post
-tags: bigdata elasticsearch scroll load balancer java client rest high level
 ---
 
 ### Overview
