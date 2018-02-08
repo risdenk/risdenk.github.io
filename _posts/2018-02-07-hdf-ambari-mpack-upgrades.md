@@ -13,7 +13,7 @@ layout: post
 ---
 
 ### Overview
-[Apache Ambari](https://ambari.apache.org/) has the concept of [management packs](https://cwiki.apache.org/confluence/display/AMBARI/Management+Packs) which provides the capability to extend what Ambari can manage. [Hortonworks HDF](https://hortonworks.com/products/data-platforms/hdf/) uses an [Ambari management pack](https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.0.2/bk_installing-hdf-and-hdp/content/ch_install-mpack.html) to add management capability for HDF. The order in which you upgrade Apache Ambari and management packs can significantly affect the success of the upgrade.
+[Apache Ambari](https://ambari.apache.org/) has the concept of [management packs](https://cwiki.apache.org/confluence/display/AMBARI/Management+Packs) which provide the capability to extend what Ambari can manage. [Hortonworks HDF](https://hortonworks.com/products/data-platforms/hdf/) uses an [Ambari management pack](https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.0.2/bk_installing-hdf-and-hdp/content/ch_install-mpack.html) to add management capability for HDF. The order in which you upgrade Apache Ambari and management packs can significantly affect the success of the upgrade.
 
 ### TL;DR
 Order matters when dealing with HDF Management Pack and Ambari upgrades. This order of operations works:
@@ -55,7 +55,7 @@ It turns out that if you upgrade the HDF management pack before upgrading Ambari
 ### Fixing HDF 3.0.2 MPack and Ambari 2.6.1
 I fixed the broken configurations with `configs.py` which ships with Ambari Server. There doesn't seem to be any negative residual effects but no promises there won't be more problems down the road.
 
-**Disclaimer: This is from HDF 3.0.2 MPack and Ambari 2.6.1 upgrading from HDF 3.0.1 and Ambari 2.5.1. This worked in my use case and cannot guarantee this will work in all cases.**
+**Disclaimer: This is from HDF 3.0.2 MPack and Ambari 2.6.1 upgrading from HDF 3.0.1 and Ambari 2.5.1. This worked in my use case and I cannot guarantee this will work in all cases.**
 
 [`fix_broken_hdf_configs.sh`]({{ "/static/posts/2018-02-07/fix_broken_hdf_configs.sh" | relative_url }})
 ```bash
