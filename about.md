@@ -5,7 +5,7 @@ layout: page
 ---
 
 <ul>
-  <li>@apache Lucene/Solr Committer</li>
+  <li>@apache <a href="https://lucene.apache.org/solr/" target="_blank">Lucene/Solr</a> Committer</li>
   <li>
     <a href="https://github.com/brianfrankcooper/ycsb/" target="_blank">YCSB</a> Contributor
   </li>
