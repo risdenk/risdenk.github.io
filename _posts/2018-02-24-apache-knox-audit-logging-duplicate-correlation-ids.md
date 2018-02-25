@@ -49,8 +49,8 @@ Setting `gateway.threadpool.max` to `6` in `gateway-site.xml`, I was able to pre
 It looks like Log4j `Mapped Diagnostic Context` (`MDC`) is the middle piece that tries to hold the `correlation id`. I'm not convinced that `MDC` is being handled correctly with the Jetty threadpool. From what I gather threads being reused can cause issues with `MDC` if it is not cleaned out between uses. I don't see any places where `MDC.remove` or `MDC.clear` is called except in tests.
 
 Some references:
-* http://ashtonkemerling.com/blog/2017/09/01/mdc-and-threadpools/
-* https://gquintana.github.io/2017/12/01/Structured-logging-with-SL-FJ-and-Logback.html
+* [http://ashtonkemerling.com/blog/2017/09/01/mdc-and-threadpools/](http://ashtonkemerling.com/blog/2017/09/01/mdc-and-threadpools/)
+* [https://gquintana.github.io/2017/12/01/Structured-logging-with-SL-FJ-and-Logback.html](https://gquintana.github.io/2017/12/01/Structured-logging-with-SL-FJ-and-Logback.html)
 
 Apache Knox doesn't look like it is clearing the `MDC` between each request. The distribution of duplicate `correlation ids` correlates with how [Jetty prefers recently busy threads](https://github.com/eclipse/jetty.project/issues/2005#issuecomment-348679675).
 
