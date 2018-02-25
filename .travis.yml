@@ -1,6 +1,6 @@
 # http://code.alxmjo.com/how-to-schedule-posts-with-jekyll/
 # https://developer.github.com/v3/repos/pages/#request-a-page-build
-
+language: c
 script:
 - ./build.sh
 
