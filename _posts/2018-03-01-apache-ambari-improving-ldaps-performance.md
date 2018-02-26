@@ -10,7 +10,6 @@ tags:
 layout: post
 ---
 
-
 ### Overview
 [Apache Ambari](https://ambari.apache.org/) makes managing distributed systems like [Apache Hadoop](https://hadoop.apache.org/) easier. One of the capabilities of Ambari is integrating with LDAP when authenticating users. Currently we sync multiple LDAP groups with Ambari and started to notice `Connection reset` errors in the logs when running an Ambari LDAP sync.
 
