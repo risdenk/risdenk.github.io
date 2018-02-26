@@ -12,6 +12,7 @@ email:
 description: Kevin Risden's Blog
 baseurl: 
 url: https://risdenk.github.io
+future: false
 twitter_username: compuwizard123
 github_username: risdenk
 google_analytics: UA-248716-10
