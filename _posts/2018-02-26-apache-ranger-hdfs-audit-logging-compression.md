@@ -19,8 +19,8 @@ layout: post
 Apache Ranger [stores audit logs on HDFS](https://cwiki.apache.org/confluence/display/RANGER/Ranger+0.5+Audit+Configuration#Ranger0.5AuditConfiguration-AudittoHDFS) in [JSON format uncompressed](https://cwiki.apache.org/confluence/display/RANGER/Ranger+Audit+Schema#RangerAuditSchema-AudittoHDFS). Each line of the audit log contains a full JSON object. The audit logs are separated into a folder per day as well. The HDFS Audit logs are not accessed frequently since most queries go against the Apache Solr short term storage.
 
 **Apache Ranger HDFS Audit Log Example**
-```
-
+```json
+{"repoType":1,"repo":"MYCLUSTER_hadoop","reqUser":"hbase","evtTime":"2018-02-26 14:07:35.335","access":"READ_EXECUTE","resource":"/apps/hbase/data/archive/data/namespace/table/rowkey/cf","resType":"path","action":"read","result":1,"policy":-1,"reason":"/apps/hbase/data/archive/data/namespace/table/rowkey/cf","enforcer":"hadoop-acl","cliIP":"192.168.1.100","agentHost":"myhost.fqdn","logType":"RangerAudit","id":"UUID","seq_num":36054670,"event_count":1,"event_dur_ms":0,"tags":[]}
 ```
 
 ### HDFS Audit Storage Requirements
