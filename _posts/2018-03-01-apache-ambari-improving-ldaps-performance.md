@@ -17,8 +17,8 @@ layout: post
 During October 2017, @quirogadf noticed the original `Connection reset` errors and worked to determine the root cause. He noticed that these errors only occurred when using LDAPS and did not happen when LDAP was being used. Over the past few months, we had increased the number of groups to sync to Ambari and were using LDAPS exclusively. Switching back to LDAP without TLS/SSL was not an option. Also decreasing the number of groups didn't seem reasonable either since this worked with regular LDAP.
 
 After some time pondering the root cause, David found two references which helped narrow down the issue:
-* https://confluence.atlassian.com/jirakb/connecting-jira-to-active-directory-over-ldaps-fails-with-connection-reset-763004137.html
-* https://docs.oracle.com/javase/jndi/tutorial/ldap/connect/config.html
+* [https://confluence.atlassian.com/jirakb/connecting-jira-to-active-directory-over-ldaps-fails-with-connection-reset-763004137.html](https://confluence.atlassian.com/jirakb/connecting-jira-to-active-directory-over-ldaps-fails-with-connection-reset-763004137.html)
+* [https://docs.oracle.com/javase/jndi/tutorial/ldap/connect/config.html](https://docs.oracle.com/javase/jndi/tutorial/ldap/connect/config.html)
 
 The root cause ended up being that LDAPS connections are not pooled by default where LDAP connections are pooled. Without pooling LDAPS connections, there were significantly more open connections in Active Directory in our case resulting in `Connection reset`.
 
