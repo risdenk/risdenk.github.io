@@ -12,7 +12,7 @@ layout: post
 ---
 
 ### Overview
-[Elasticsearch](https://www.elastic.co/products/elasticsearch) security is implemented through [X-Pack](https://www.elastic.co/guide/en/x-pack/current/xpack-introduction.html) which is an [Elastic](https://www.elastic.co/) proprietary component. Although [Elasticsearch is released under an open source license](https://github.com/elastic/elasticsearch), X-Pack is developed solely by Elastic without external influence. 
+[Elasticsearch](https://www.elastic.co/products/elasticsearch) security is implemented through [X-Pack](https://www.elastic.co/guide/en/x-pack/current/xpack-introduction.html) which is an [Elastic](https://www.elastic.co/) proprietary component. Although [Elasticsearch is released under an open source license](https://github.com/elastic/elasticsearch), X-Pack is developed solely by Elastic without external influence. This is [changing soon](https://www.elastic.co/blog/doubling-down-on-open) in Elastic Stack 6.3 with Elastic [making the X-Pack code available](https://www.elastic.co/products/x-pack/open).
 
 ### NPE with X-Pack `_has_privileges` API
 While exploring capabilities provided by X-Pack, I found the [`_has_privileges` Privilege API](https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-privileges.html) that "allows you to determine whether the logged in user has a specified list of privileges.". I expected that issuing a call to `_has_privileges` would return what the user was allowed to do. I made the request as documented [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-privileges.html#_request_41).
@@ -48,4 +48,7 @@ curl http://localhost:9200/_xpack/security/user/_has_privileges
 This was first fixed in [Elasticsearch X-Pack 6.1.0](https://www.elastic.co/guide/en/elasticsearch/reference/current/xes-6.1.0.html#xes-bug-6.1.0).
 
 > Fixed REST requests that required a body but did not validate it, resulting in null pointer exceptions.
+
+### X-Pack Code Available by EULA
+With X-Pack code becoming available in Elastic Stack 6.3, it will be possible to now debug and help pinpoint NPE exceptions. There is no guarantee that Elastic will fix these issues but collaboration is easier. Although not explicitly open source by the OSI definition, it will be possible to see the code.
 
