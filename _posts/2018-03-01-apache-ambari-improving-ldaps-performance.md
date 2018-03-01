@@ -25,7 +25,7 @@ The root cause ended up being that LDAPS connections are not pooled by default w
 ### Improving Apache Ambari LDAPS Performance
 Once @quirogadf had determined the root cause, we worked to make the suggested change to Apache Ambari. `/var/lib/ambari-server/ambari-env.sh` contains all the environment setup for Ambari Server. We were able to add the following line to `ambari-env.sh`:
 
-```
+```bash
 # ldap connection pooling
 export AMBARI_JVM_ARGS=$AMBARI_JVM_ARGS" -Dcom.sun.jndi.ldap.connect.pool.protocol='plain ssl' -Dcom.sun.jndi.ldap.connect.pool.maxsize=20 -Dcom.sun.jndi.ldap.connect.pool.timeout=300000"
 ```
