@@ -1,6 +1,6 @@
 ---
 title: Apache Hive - External Table Read Only
-date: 2018-03-06 12:00:00 -06:00
+date: 2018-03-10 12:00:00 -06:00
 tags:
 - bigdata
 - apache
