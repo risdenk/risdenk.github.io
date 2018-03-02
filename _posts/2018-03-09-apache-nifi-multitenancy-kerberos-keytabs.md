@@ -1,6 +1,6 @@
 ---
 title: Apache NiFi Multitenancy and Kerberos Keytabs
-date: 2018-03-07 12:00:00 -06:00
+date: 2018-03-09 12:00:00 -06:00
 tags:
 - bigdata
 - apache
