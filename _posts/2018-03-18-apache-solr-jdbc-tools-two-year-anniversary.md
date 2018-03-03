@@ -1,6 +1,6 @@
 ---
 title: Apache Solr - JDBC Tools - Two Year Anniversary
-date: 2018-03-18 12:00:00 -06:00
+date: 2018-03-18 13:00:00 -05:00
 tags:
 - bigdata
 - apache
