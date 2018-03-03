@@ -1,6 +1,6 @@
 ---
 title: HDP and HDF Monitoring Improvements
-date: 2018-03-12 12:00:00 -06:00
+date: 2018-03-12 13:00:00 -05:00
 tags:
 - bigdata
 - hortonworks
