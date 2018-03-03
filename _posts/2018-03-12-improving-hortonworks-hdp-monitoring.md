@@ -18,6 +18,10 @@ tags:
 layout: post
 ---
 
+**Update for March 2018**
+
+The content below was created in mid to late 2017. Some of it is now out of date since we have improved our monitoring further. Big shout out to @quirogadf and @westeras for helping make the ideas come to life quickly and fixing performance issues along the way.
+
 ### Overview
 [Hortonworks Data Platform (HDP)](https://hortonworks.com/products/data-platforms/hdp/) and [Hortonworks Data Flow (HDF)](https://hortonworks.com/products/data-platforms/hdf/) are both critical components of the big data infrastructure my team supports. The big data infrastructure powers not only near real time applications but also powers analytics. Since these use cases are core to daily operations, monitoring is very important to ensure that everything runs smoothly throughout the day. There are a few components in HDP and HDF that historically have no monitoring yet are critical to ensuring proper cluster operations. We addressed the monitoring shortcomings with the [Elastic stack](https://www.elastic.co/products) which we were already using for other use cases. By combining HDP and HDF with the Elastic stack, we were able to build out the monitoring necessary to answer performance questions we had.
 
