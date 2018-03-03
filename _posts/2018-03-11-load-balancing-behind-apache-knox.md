@@ -1,6 +1,6 @@
 ---
 title: Load Balancing Behind Apache Knox
-date: 2018-03-11 12:00:00 -06:00
+date: 2018-03-11 13:00:00 -05:00
 tags:
 - bigdata
 - apache
