@@ -1,6 +1,6 @@
 ---
 title: Apache Solr - JDBC Introduction - Two Year Anniversary
-date: 2018-03-17 12:00:00 -06:00
+date: 2018-03-17 13:00:00 -05:00
 tags:
 - bigdata
 - apache
