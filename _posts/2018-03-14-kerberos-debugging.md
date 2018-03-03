@@ -1,6 +1,6 @@
 ---
 title: Kerberos Debugging
-date: 2018-03-14 12:00:00 -06:00
+date: 2018-03-14 13:00:00 -05:00
 tags:
 - bigdata
 - kerberos
