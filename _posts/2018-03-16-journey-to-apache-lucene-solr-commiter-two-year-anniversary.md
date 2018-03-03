@@ -1,6 +1,6 @@
 ---
 title: My Journey to Apache Lucene/Solr Committer - Two Year Anniversary
-date: 2018-03-16 12:00:00 -06:00
+date: 2018-03-16 13:00:00 -05:00
 tags:
 - bigdata
 - apache
