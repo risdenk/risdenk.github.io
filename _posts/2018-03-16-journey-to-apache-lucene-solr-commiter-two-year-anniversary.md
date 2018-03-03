@@ -12,7 +12,7 @@ layout: post
 ---
 
 #### March 2018 Update
-I originally posted this content to LinkedIn [here](https://www.linkedin.com/pulse/my-journey-apache-lucenesolr-committer-kevin-risden/) in April 2016. Cross posting to my blog ~2 years later with minor edits on the 2 year anniversary of the [announcement](http://mail-archives.apache.org/mod_mbox/lucene-dev/201603.mbox/%3CCAE4tqLPcNwyJpsD8UBUJ67-52TVWDq-GY7H1Bk8_C1RO_7KFgA@mail.gmail.com%3E) of me becoming an [Apache Lucene/Solr](https://lucene.apache.org/solr/) committer.
+I originally posted this content to LinkedIn [here](https://www.linkedin.com/pulse/my-journey-apache-lucenesolr-committer-kevin-risden/) in April 2016. Cross posting to my blog with minor edits on the 2 year anniversary of the [announcement](http://mail-archives.apache.org/mod_mbox/lucene-dev/201603.mbox/%3CCAE4tqLPcNwyJpsD8UBUJ67-52TVWDq-GY7H1Bk8_C1RO_7KFgA@mail.gmail.com%3E) of me becoming an [Apache Lucene/Solr](https://lucene.apache.org/solr/) committer.
 
 ### Introduction
 I worked for [Avalon Consulting, LLC](https://www.avalonconsult.com) from 2013-2017. I wrote this ~3 years after joining Avalon to relect on my time there and on becoming a Apache Lucene/Solr committer. My time at Avalon had been a whirlwind of technologies and projects with a focus on search and search with Hadoop. In this post I wanted to outline some of my experiences and what led to my contributing to [Apache Solr](https://lucene.apache.org/solr/) -- specifically the Solr JDBC driver.
