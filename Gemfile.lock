@@ -92,7 +92,7 @@ GEM
       pathutil (~> 0.9)
       rouge (>= 1.7, < 3)
       safe_yaml (~> 1.0)
-    jekyll-admin (0.7.0)
+    jekyll-admin (0.8.0)
       addressable (~> 2.4)
       jekyll (~> 3.3)
       sinatra (~> 1.4)
@@ -216,7 +216,7 @@ GEM
       rack
     rack-test (0.8.3)
       rack (>= 1.0, < 3)
-    rb-fsevent (0.10.2)
+    rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     rouge (2.2.1)
