@@ -58,8 +58,6 @@ curl \
 ```java
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
-import org.apache.hadoop.hbase.client.Connection;
-import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.io.ImmutableBytesWritable;
 import org.apache.hadoop.hbase.mapreduce.TableInputFormat;
@@ -77,11 +75,9 @@ public class SparkHBaseKerberos {
     SparkConf sparkConf = new SparkConf().setAppName(SparkHBaseKerberos.class.getCanonicalName());
     try (JavaSparkContext jsc = new JavaSparkContext(sparkConf)) {
       Configuration config = HBaseConfiguration.create();
-      try (Connection connection = ConnectionFactory.createConnection(config)) {
-        config.set(TableInputFormat.INPUT_TABLE, tableName);
-        JavaPairRDD<ImmutableBytesWritable, Result> rdd = jsc.newAPIHadoopRDD(config, TableInputFormat.class, ImmutableBytesWritable.class, Result.class);
-        System.out.println("Number of Records found: " + rdd.count());
-      }
+      config.set(TableInputFormat.INPUT_TABLE, tableName);
+      JavaPairRDD<ImmutableBytesWritable, Result> rdd = jsc.newAPIHadoopRDD(config, TableInputFormat.class, ImmutableBytesWritable.class, Result.class);
+      System.out.println("Number of Records found: " + rdd.count());
 
       System.out.println("Done");
 
