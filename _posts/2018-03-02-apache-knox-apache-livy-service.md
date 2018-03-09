@@ -11,7 +11,7 @@ layout: post
 ---
 
 ### Overview
-[Apache Knox](https://knox.apache.org/) is a reverse proxy that simplifies security in front of a Kerberos secured [Apache Hadoop](https://hadoop.apache.org/) cluster and other related components. Knox can be extended with [custom services](https://cwiki.apache.org/confluence/display/KNOX/2015/12/17/Adding+a+service+to+Apache+Knox) to support authenticating compoents that aren't originally shipped with a release. One of the services we wanted Apache Knox support for was [Apache Livy](https://livy.incubator.apache.org/), a REST API for interacting with [Apache Spark](https://spark.apache.org/).
+[Apache Knox](https://knox.apache.org/) is a reverse proxy that simplifies security in front of a Kerberos secured [Apache Hadoop](https://hadoop.apache.org/) cluster and other related components. Knox can be extended with [custom services](https://cwiki.apache.org/confluence/display/KNOX/2015/12/17/Adding+a+service+to+Apache+Knox) to support authenticating components that aren't originally shipped with a release. One of the services we wanted Apache Knox support for was [Apache Livy](https://livy.incubator.apache.org/), a REST API for interacting with [Apache Spark](https://spark.apache.org/).
 
 ### Why use an Apache Knox service for Apache Livy?
 Apache Knox simplifies deployments with multiple REST services since the authentication can be handled in a single location. Knox also significantly simplifies end user interactions since they don't need to deal with Kerberos authentication. Apache Livy, when configured with Kerberos, is hard to use and interact with. Apache Knox makes this simple but supporting basic authentication via LDAP as well as other authentication mechanisms. 
