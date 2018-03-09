@@ -22,8 +22,38 @@ layout: default
 
   <!--AddThis Share Toolbox-->
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5aa1eafcd3d0cc60"></script>
-  <div class="addthis_inline_share_toolbox"></div>
+  <div style="margin-bottom: 15px;" class="addthis_inline_share_toolbox"></div>
   <!--End AddThis Share Toolbox-->
+
+  <hr />
+
+  <style type="text/css">
+  .PageNavigation {
+    display: block;
+    width: auto;
+    overflow: hidden;
+  }
+
+  .PageNavigation a {
+    display: block;
+    width: 50%;
+    float: left;
+    margin-top: 1em;
+  }
+
+  .PageNavigation .next {
+    text-align: right;
+  }
+  </style>
+
+  <div class="PageNavigation">
+    {% if page.previous.url %}
+      <a class="prev" href="{{page.previous.url}}">&laquo; {{page.previous.title}}</a>
+    {% endif %}
+    {% if page.next.url %}
+      <a class="next" href="{{page.next.url}}">{{page.next.title}} &raquo;</a>
+    {% endif %}
+  </div>
 
   {% if site.disqus.shortname %}
     {% include disqus_comments.html %}
