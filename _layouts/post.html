@@ -2,7 +2,36 @@
 layout: default
 ---
 
-<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <style type="text/css">
+  .PageNavigation {
+    display: block;
+    width: auto;
+    overflow: hidden;
+  }
+
+  .PageNavigation a {
+    display: block;
+    width: 50%;
+    float: left;
+  }
+
+  .PageNavigation .next {
+    text-align: right;
+  }
+  </style>
+
+  <div class="PageNavigation" style="margin-bottom: 1em;">
+    {% if page.previous.url %}
+      <a class="prev" href="{{page.previous.url}}">&laquo; {{page.previous.title}}</a>
+    {% endif %}
+    {% if page.next.url %}
+      <a class="next" href="{{page.next.url}}">{{page.next.title}} &raquo;</a>
+    {% endif %}
+  </div>
+
+  <hr />
+
+<article class="post h-entry" style="margin-top: 1em;" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
@@ -27,26 +56,7 @@ layout: default
 
   <hr />
 
-  <style type="text/css">
-  .PageNavigation {
-    display: block;
-    width: auto;
-    overflow: hidden;
-  }
-
-  .PageNavigation a {
-    display: block;
-    width: 50%;
-    float: left;
-    margin-top: 1em;
-  }
-
-  .PageNavigation .next {
-    text-align: right;
-  }
-  </style>
-
-  <div class="PageNavigation">
+  <div class="PageNavigation" style="margin-top: 1em;">
     {% if page.previous.url %}
       <a class="prev" href="{{page.previous.url}}">&laquo; {{page.previous.title}}</a>
     {% endif %}
