@@ -12,6 +12,11 @@ tags:
 layout: post
 ---
 
+**Update - 2018-03-10**
+* @bbende pointed out on [Twitter](https://twitter.com/BBende/status/972241489655992320) that there are two [Apache NiFi](https://nifi.apache.org/) recently opened issues related to this:
+    * [NIFI-4885](https://issues.apache.org/jira/browse/NIFI-4885)
+    * [NIFI-4917](https://issues.apache.org/jira/browse/NIFI-4917)
+
 ### Overview
 [Apache NiFi](https://nifi.apache.org/) is "an easy to use, powerful, and reliable system to process and distribute data." [NiFi supports multi tenancy](https://nifi.apache.org/docs/nifi-docs/html/user-guide.html#UI-with-multi-tenant-authorization) where different users can use a single NiFi instance. [Restricted](https://static.javadoc.io/org.apache.nifi/nifi-api/1.5.0/org/apache/nifi/annotation/behavior/Restricted.html) [components](https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.0.2/bk_developer-guide/content/restricted.html) are a feature of NiFi that try to identify dangerous components that can have separate authorization policies.
 
