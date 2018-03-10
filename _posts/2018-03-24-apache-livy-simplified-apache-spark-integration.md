@@ -1,6 +1,6 @@
 ---
 title: Apache Livy - Simplified Apache Spark Integration
-date: 2018-03-24 12:00:00 -06:00
+date: 2018-03-24 13:00:00 -05:00
 tags:
 - bigdata
 - apache
