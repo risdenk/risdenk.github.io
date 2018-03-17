@@ -428,6 +428,13 @@ This is most likely caused by the Apache NiFi TLS Toolkit Apache Knox keystore n
 
 Another reason for this could be that Apache NiFi doesn't trust the client certificate provided. The Apache NiFi truststore configured in `nifi.properties` could not trust the certificate provided. There aren't any errors in `nifi-app.log` that would indicate this. See details above in "Configure Apache NiFi for TLS/SSL".
 
+#### Apache Knox - `SSLPeerUnverifiedException`
+```
+javax.net.ssl.SSLPeerUnverifiedException: Certificate for <NIFI-IP-ADDR> doesn't match any of the subject alternative names: [NIFI-IP-ADDR]
+```
+
+In the blog above I don't recommend using IP addresses since they don't work well with TLS/SSL certificates. The Apache NiFi TLS Toolkit [does not support generating certificates for IP addresses](https://github.com/apache/nifi/blob/master/nifi-toolkit/nifi-toolkit-tls/src/main/java/org/apache/nifi/toolkit/tls/util/TlsHelper.java#L226). The error above is because the certificate thinks the IP address is actually a DNS entry and doesn't match.
+
 ### Something not mentioned?
 If you have further questions not answered here, reach out on the [Apache Knox user mailing list](https://knox.apache.org/mail-lists.html). 
 
