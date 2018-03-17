@@ -15,6 +15,9 @@ tags:
 layout: post
 ---
 
+**Update - 2018-03-17**
+* Fixed details around `PreAuthenticate` based on [feedback](https://twitter.com/lmccay/status/975030361439789056) from @lmccay
+
 ### TL;DR
 .Net [WebHDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/WebHDFS.html) client that works with and without [Apache Knox](https://knox.apache.org).
 
@@ -82,10 +85,10 @@ While researching existing WebHDFS libraries, I found that .Net has many differe
     * Source and example of use:
         * [https://github.com/risdenk/webhdfs-dotnet/](https://github.com/risdenk/webhdfs-dotnet/)
 
-#### Notes about WebHDFS with Apache Knox
-`PreAuthenticate` is misleading when it comes to understanding how 401s are handled. Apache Knox injects a 401 response if there are no `Authorization` headers present in the initial request. The 401s are expected even with the `PreAuthenticate`. `PreAuthenticate` only caches the 401 and then the next request won't have to deal with a 401 if you were to make repeated calls to the same host.
+#### Notes about .Net `PreAuthenticate`
+In .Net `PreAuthenticate` is extremely misleading when it comes how 401s are handled. If a web service requires authentication, it returns a 401 response if there are no `Authorization` headers present in the initial request. The resulting 401 is expected on the initial request even with the `PreAuthenticate`. `PreAuthenticate` only caches the 401 and then the next request .Net will send credentials. This means that `PreAuthenticate` is only useful if you make repeated calls to the same host.
 
-#### WebHDFS with Apache Knox Sequence Diagram - Create File
+### WebHDFS with Apache Knox Sequence Diagram - Create File
 For reference this is the sequence diagram that is being followed for the WebHDFS create file request through Apache Knox:
 
 <img src="/images/posts/2017-12-19/webhdfs_knox_create_file_sequence_diagram.svg" />
