@@ -1,6 +1,6 @@
 ---
 title: ".Net WebHDFS Client (with and without Apache Knox)"
-date: 2017-12-19 18:00:00 Z
+date: 2017-12-19 12:00:00 -06:00
 tags:
 - bigdata
 - apache
