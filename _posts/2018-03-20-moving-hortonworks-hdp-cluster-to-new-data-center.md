@@ -1,6 +1,6 @@
 ---
 title: Moving Hortonworks HDP Clusters to a New Data Center
-date: 2018-03-20 13:00:00 -05:00
+date: 2018-03-20 12:00:00 -05:00
 tags:
 - bigdata
 - hortonworks

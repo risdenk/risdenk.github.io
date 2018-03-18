@@ -1,6 +1,6 @@
 ---
 title: Java - JVM Security Information Gathering
-date: 2018-03-22 13:00:00 -05:00
+date: 2018-03-22 12:00:00 -05:00
 tags:
 - java
 - jvm

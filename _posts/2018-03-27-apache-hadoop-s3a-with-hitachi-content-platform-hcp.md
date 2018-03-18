@@ -1,6 +1,6 @@
 ---
 title: Apache Hadoop S3A With Hitachi Content Platform (HCP)
-date: 2018-03-27 13:00:00 -05:00
+date: 2018-03-27 12:00:00 -05:00
 tags:
 - bigdata
 - apache
