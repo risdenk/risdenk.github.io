@@ -1,6 +1,6 @@
 ---
 title: Apache Knox - Proxying Apache NiFi
-date: 2018-03-18 8:00:00 -05:00
+date: 2018-03-18 08:00:00 -05:00
 tags:
 - bigdata
 - apache
