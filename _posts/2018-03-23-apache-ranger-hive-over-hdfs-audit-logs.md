@@ -1,6 +1,6 @@
 ---
 title: Apache Ranger - Hive over HDFS Audit Logs
-date: 2018-03-23 12:00:00 -05:00
+date: 2018-03-23 09:00:00 -05:00
 tags:
 - bigdata
 - apache
