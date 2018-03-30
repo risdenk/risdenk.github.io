@@ -109,7 +109,7 @@ GEM
     jekyll-coffeescript (1.1.1)
       coffee-script (~> 2.2)
       coffee-script-source (~> 1.11.1)
-    jekyll-commonmark (1.1.0)
+    jekyll-commonmark (1.2.0)
       commonmarker (~> 0.14)
       jekyll (>= 3.0, < 4.0)
     jekyll-commonmark-ghpages (0.1.5)
@@ -224,7 +224,7 @@ GEM
     rack (1.6.9)
     rack-protection (1.5.5)
       rack
-    rack-test (0.8.3)
+    rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
