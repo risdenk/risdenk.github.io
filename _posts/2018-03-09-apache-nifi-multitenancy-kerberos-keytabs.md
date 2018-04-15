@@ -12,6 +12,10 @@ tags:
 layout: post
 ---
 
+**Update - 2018-04-15**
+* On April 8, 2018, [Apache NiFi 1.6.0](https://cwiki.apache.org/confluence/display/NIFI/Release+Notes) was released. This release includes features that improve Kerberos keytab handling.
+    * @bbende has a [blog post](https://bryanbende.com/development/2018/04/09/apache-nifi-secure-keytab-access) about these new features.
+
 **Update - 2018-03-10**
 * @bbende pointed out on [Twitter](https://twitter.com/BBende/status/972241489655992320) that there are two [Apache NiFi](https://nifi.apache.org/) recently opened issues related to this:
     * [NIFI-4885](https://issues.apache.org/jira/browse/NIFI-4885)
