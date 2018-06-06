@@ -10,6 +10,9 @@ tags:
 layout: post
 ---
 
+**Update - 2018-06-05**
+* [Ambari 2.6.2](https://docs.hortonworks.com/HDPDocuments/Ambari/Ambari-2.6.2.0/index.html) is the first release containing [AMBARI-22834](https://issues.apache.org/jira/browse/AMBARI-22834).
+
 ### Overview
 [Apache Ambari](https://ambari.apache.org/) makes managing distributed systems like [Apache Hadoop](https://hadoop.apache.org/) easier. One of the capabilities of Ambari is alerting. These alerts can alert administrators and trigger automatic recovery. Ambari can manage [Apache Zeppelin](https://zeppelin.apache.org/). This management includes starting, stopping, and alert when Zeppelin stops.
 
