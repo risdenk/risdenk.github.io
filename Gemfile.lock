@@ -8,7 +8,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    backports (3.11.3)
+    backports (3.11.4)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
