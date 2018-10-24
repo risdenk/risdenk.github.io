@@ -14,13 +14,13 @@ layout: post
 ---
 
 ### Overview
-[Apache Solr](https://lucene.apache.org/solr) is a full text search engine that is built on [Apache Lucene](https://lucene.apache.org/solr/). I've been working with Apache Solr for the past six years. Some of these were pure Solr installations, but many were integrated with [Apache Hadoop](). This includes both Hortonworks HDP Search as well as Cloudera Search. Performance for Solr on [HDFS]() is a common question so writing this post to help share some of my experience.
+[Apache Solr](https://lucene.apache.org/solr) is a full text search engine that is built on [Apache Lucene](https://lucene.apache.org/solr/). I've been working with Apache Solr for the past six years. Some of these were pure Solr installations, but many were integrated with [Apache Hadoop](https://hadoop.apache.org/). This includes both Hortonworks HDP Search as well as Cloudera Search. Performance for Solr on [HDFS](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html) is a common question so writing this post to help share some of my experience.
 
 ### Apache Hadoop HDFS
-[Apache Hadoop]() contains a filesystem called [Hadoop Distributed File System (HDFS)](). HDFS is designed to scale to petabytes of data on commodity hardware. The definition of commodity hardware has changed over the years, but the premise is that the latest and greatest hardware is not needed. HDFS is used by a variety of workloads from [Apache HBase]() to [Apache Spark](). Performance on HDFS tends to favor large files for both reading and writing. HDFS also uses all available disks for I/O which can be helpful for large clusters. 
+[Apache Hadoop](https://hadoop.apache.org/) contains a filesystem called [Hadoop Distributed File System (HDFS)](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html). HDFS is designed to scale to petabytes of data on commodity hardware. The definition of commodity hardware has changed over the years, but the premise is that the latest and greatest hardware is not needed. HDFS is used by a variety of workloads from [Apache HBase](https://hbase.apache.org/) to [Apache Spark](https://spark.apache.org/). Performance on HDFS tends to favor large files for both reading and writing. HDFS also uses all available disks for I/O which can be helpful for large clusters. 
 
 ### Apache Solr and HDFS
-Apache Solr can run on HDFS since the early 4.x versions. [Cloudera Search]() added this capability to be able to use the existing HDFS storage for search. [Hortonworks HDP Search](), since it is based on Apache Solr, has support for HDFS as well. Since HDFS is not a local filesystem, Apache Solr implements a block cache that is designed to help cache HDFS blocks in memory. With the HDFS block cache for querying, Apache Solr can have slower but similar performance to local indices. The HDFS block cache is not used for merging, indexing, or read once use cases. This means that there are some areas where Apache Solr with HDFS can be slower.
+Apache Solr can run on HDFS since the early 4.x versions. [Cloudera Search](https://www.cloudera.com/products/open-source/apache-hadoop/apache-solr.html) added this capability to be able to use the existing HDFS storage for search. [Hortonworks HDP Search](https://hortonworks.com/blog/enterprise-search-hdp-search/), since it is based on Apache Solr, has support for HDFS as well. Since HDFS is not a local filesystem, Apache Solr implements a block cache that is designed to help cache HDFS blocks in memory. With the HDFS block cache for querying, Apache Solr can have slower but similar performance to local indices. The HDFS block cache is not used for merging, indexing, or read once use cases. This means that there are some areas where Apache Solr with HDFS can be slower.
 
 ### Apache Solr Performance
 If you are looking for the best performance with the fewest variations, then SSDs and ample memory is where you should be looking. If you are budget constrained, then spinning disks with memory can also provide adequate performance. Solr on HDFS can perform just as well as local disks given the right amount of memory. The common "it depends" caveat will come down to the specific use case. For large scale analytics then Solr on HDFS performs well. For high speed indexing then you will need SSDs since the write performance of Solr on HDFS is not going to match.
@@ -61,7 +61,7 @@ Block cache target memory usage, slab size of [134217728] will allocate [40] sla
 ```
 
 #### Ensure that HDFS Short Circuit Reads are enabled
-[HDFS Short Circuit Reads]() allow the HDFS library to read from a local socket instead of making a network call. This can significantly improve read performance.
+[HDFS Short Circuit Reads](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/ShortCircuitLocalReads.html) allow the HDFS library to read from a local socket instead of making a network call. This can significantly improve read performance.
 
 #### Example Configuration
 ```
