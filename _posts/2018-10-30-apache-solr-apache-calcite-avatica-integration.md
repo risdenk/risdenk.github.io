@@ -1,6 +1,6 @@
 ---
 title: Apache Solr - Apache Calcite Avatica Integration
-date: 2018-10-25 09:00:00 -05:00
+date: 2018-10-30 09:00:00 -05:00
 tags:
 - bigdata
 - apache
