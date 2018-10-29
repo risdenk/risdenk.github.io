@@ -1,6 +1,6 @@
 ---
 title: Apache HBase - Snappy Compression
-date: 2018-11-06 09:00:00 -05:00
+date: 2018-11-06 08:00:00 -06:00
 tags:
 - bigdata
 - apache
