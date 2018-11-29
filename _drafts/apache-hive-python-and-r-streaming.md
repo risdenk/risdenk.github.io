@@ -93,9 +93,9 @@ x STRING,
 y STRING
 )
 ROW FORMAT DELIMITED
-FIELDS TERMINATED BY ‘,’
+FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION ‘/user/USERNAME/hive_streaming’;
+LOCATION '/user/USERNAME/hive_streaming';
 
 CREATE TABLE bincat (
 	x STRING,
@@ -155,7 +155,7 @@ while (length(line <- readLines(conn, n = 1, warn = F)) > 0) {
 close(conn)
 ```
 
-`hive -e “ADD FILE testRDTM.R; SELECT TRANSFORM(id, text) USING ‘Rscript testRDTM.R’ as (word, count, id) FROM reuters.data;”`
+`hive -e "ADD FILE testRDTM.R; SELECT TRANSFORM(id, text) USING 'Rscript testRDTM.R' as (word, count, id) FROM reuters.data;"`
 
 R DTM - Custom Settings
 
@@ -186,7 +186,7 @@ while (length(line <- readLines(conn, n = 1, warn = F)) > 0) {
 close(conn)
 ```
 
-`hive -e “ADD FILE testRDTMCustom.R; SELECT TRANSFORM(id, text) USING ‘Rscript testRDTMCustom.R’ as (word, count, id) FROM reuters.data;”`
+`hive -e "ADD FILE testRDTMCustom.R; SELECT TRANSFORM(id, text) USING 'Rscript testRDTMCustom.R' as (word, count, id) FROM reuters.data;"`
 
 R DTM - Custom Settings - NGrams
 
@@ -219,11 +219,10 @@ while (length(line <- readLines(conn, n = 1, warn = F)) > 0) {
 close(conn)
 ```
 
-`hive -e “ADD FILE testRDTMCustomNGrams.R; SELECT TRANSFORM(id, text) USING ‘Rscript testRDTMCustomNGrams.R’ as (word, count, id) FROM reuters.data;”`
+`hive -e "ADD FILE testRDTMCustomNGrams.R; SELECT TRANSFORM(id, text) USING 'Rscript testRDTMCustomNGrams.R' as (word, count, id) FROM reuters.data;"`
 
 ### Debugging Hive Streaming
 #### Running without Hive
 * `echo "testRow" | map | sort -k1,1 | reduce`
 * `cat file | map | sort -k1,1 | reduce`
 * `cat file | tr '\001' '\t' | map | sort -k1,1 | reduce`
-
